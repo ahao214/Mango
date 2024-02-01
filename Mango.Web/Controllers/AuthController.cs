@@ -1,4 +1,5 @@
-﻿using Mango.Web.Services.IServices;
+﻿using Mango.Web.Models;
+using Mango.Web.Services.IServices;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Mango.Web.Controllers
@@ -16,7 +17,8 @@ namespace Mango.Web.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            LoginRequestDto loginRequestDto = new ();
+            return View(loginRequestDto);
         }
 
 
@@ -26,7 +28,7 @@ namespace Mango.Web.Controllers
             return View();
         }
 
-        
+
         public IActionResult Logout()
         {
             return View();
