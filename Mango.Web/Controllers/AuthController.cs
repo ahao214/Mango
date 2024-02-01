@@ -96,9 +96,12 @@ namespace Mango.Web.Controllers
             return View(obj);
         }
 
-        public IActionResult Logout()
+        public async Task<IActionResult> Logout()
         {
-            return View();
+            await HttpContext.SignOutAsync();
+            _tokenProvider.ClearToken();
+
+            return RedirectToAction("Index", "Home");
         }
 
 
@@ -117,7 +120,7 @@ namespace Mango.Web.Controllers
             identity.AddClaim(new Claim(ClaimTypes.Name, jwt.Claims.FirstOrDefault(u => u.Type == JwtRegisteredClaimNames.Email).Value));
 
 
-            var principal = new ClaimsPrincipal();
+            var principal = new ClaimsPrincipal(identity);
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
         }
 
