@@ -56,8 +56,8 @@ builder.Services.AddSwaggerGen(option =>
 
 });
 
+// ªÒ»°ApiSettings
 var settingsSection = builder.Configuration.GetSection("ApiSettings");
-
 var secret = settingsSection.GetValue<string>("Secret");
 var issuer = settingsSection.GetValue<string>("Issuer");
 var audience = settingsSection.GetValue<string>("Audience");
@@ -83,6 +83,8 @@ builder.Services.AddAuthentication(x =>
 });
 
 builder.Services.AddAuthorization();
+
+
 
 var app = builder.Build();
 
